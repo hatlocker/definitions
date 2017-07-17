@@ -1,0 +1,15 @@
+<template>
+  <name>hatlocker</name>
+  <os>
+    <name>Fedora</name>
+    <version>26</version>
+    <arch>x86_64</arch>
+    <install type='url'>
+      <url>https://dl.fedoraproject.org/pub/fedora/linux/releases/26/Server/x86_64/os/</url>
+    </install>
+  </os>
+  <description>Hatlocker</description>
+  <disk>
+    <size>10</size>
+  </disk>
+</template>
