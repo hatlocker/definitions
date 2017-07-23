@@ -39,6 +39,9 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 
 # Note that running rpm recreates the rpm db files which aren't needed/wanted
 rm -f /var/lib/rpm/__db*
+
+# Register our compose time
+echo "{{ now }}" >/var/lib/composetime
 %end
 
 
