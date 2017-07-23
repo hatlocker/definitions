@@ -1,0 +1,10 @@
+NAME=Hatlocker
+VERSION="1"
+ID=hatlocker
+VERSION_ID=1
+PRETTY_NAME="Hatlocker 1"
+HOME_URL="https://hatlocker.org/"
+SUPPORT_URL="https://hatlocker.org/"
+BUG_REPORT_URL="https://hatlocker.org/"
+VARIANT="Primary"
+VARIANT_ID=primary
