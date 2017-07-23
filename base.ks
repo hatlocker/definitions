@@ -20,7 +20,7 @@ repo --name="updates" --mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?
 # Disk partitioning
 zerombr
 clearpart --all
-part / --fstype="ext4" --grow --size=3000
+part / --fstype="ext4" --grow --size=1000
 # Disable root
 rootpw --lock
 # SELinux enforcing
