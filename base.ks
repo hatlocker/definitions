@@ -56,6 +56,7 @@ lvm2
 cryptsetup
 efibootmgr
 basesystem
+veritysetup
 # The custom packages
 i3
 i3lock
