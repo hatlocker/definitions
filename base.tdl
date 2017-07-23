@@ -10,6 +10,6 @@
   </os>
   <description>Hatlocker</description>
   <disk>
-    <size>4</size>
+    <size>5</size>
   </disk>
 </template>
