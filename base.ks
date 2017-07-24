@@ -17,6 +17,7 @@ network  --bootproto=dhcp --device=link --activate
 url --url=http://dl.fedoraproject.org/pub/fedora/linux/development/rawhide/Everything/x86_64/os
 repo --name="fedora" --mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-26&arch=x86_64
 repo --name="updates" --mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f26&arch=x86_64
+repo --name="hatlocker" --baseurl=https://hatlocker.org/repo/repo
 # Disk partitioning
 zerombr
 clearpart --all
@@ -60,6 +61,8 @@ cryptsetup
 efibootmgr
 basesystem
 veritysetup
+# Hatlocker custom packages
+dracut-verity
 # The custom packages
 i3
 i3lock
