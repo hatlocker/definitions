@@ -9,7 +9,7 @@ firstboot --disable
 # At the end, just power off
 poweroff
 # Set keyboard
-keyboard 'us'
+keyboard --vckeymap=us --xlayouts=''
 # U.S. English
 lang en_US.UTF-8
 # Network config and repo
@@ -21,15 +21,19 @@ repo --name="hatlocker" --baseurl=https://hatlocker.org/repo/repo
 # Disk partitioning
 zerombr
 clearpart --all
+part /boot --fstype="ext4" --size=200
 part / --fstype="ext4" --grow --size=1000
 # Disable root
 rootpw --lock
 # SELinux enforcing
 selinux --enforcing
 # Timezone
-timezone etc/UTC --utc
+timezone Etc/UTC --utc
 # Auth config
 authconfig --enableshadow --passalgo=bcrypt --disablefingerprint --enablecryptfs
+# Services
+services --enabled="chronyd"
+xconfig --startxonboot
 
 
 %post --erroronfail
