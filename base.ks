@@ -50,6 +50,7 @@ echo "{{ now }}" >/var/lib/composetime
 
 # Make sure we get the correct dracut modules added
 printf "add_dracutmodules+=\" verity crypt \"\nhostonly=\"no\"" > /etc/dracut.conf.d/hatlocker.conf
+dracut -v --force --no-hostonly
 %end
 
 
@@ -84,4 +85,5 @@ pcsc-lite-ccid
 -dracut-config-rescue
 -grub2
 -dnf
+-grubby
 %end
