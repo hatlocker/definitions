@@ -50,7 +50,8 @@ echo "{{ now }}" >/var/lib/composetime
 
 # Make sure we get the correct dracut modules added
 printf "add_dracutmodules+=\" verity crypt \"\nhostonly=\"no\"" > /etc/dracut.conf.d/hatlocker.conf
-dracut -v --force --no-hostonly
+kernel="`ls /boot/vmlinuz-* | sed -e 's/vmlinuz-//'`"
+dracut -v --force --no-hostonly --reproducible --show-modules /boot/hlinitramfs-$kernel.img
 %end
 
 
