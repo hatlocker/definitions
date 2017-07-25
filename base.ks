@@ -46,7 +46,7 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 rm -f /var/lib/rpm/__db*
 
 # Register our compose time
-echo "{{ now }}" >/var/lib/composetime
+echo "{{ version }}" >/var/lib/hatlocker-version
 
 # Make sure we get the correct dracut modules added
 printf "add_dracutmodules+=\" verity crypt \"\nhostonly=\"no\"" > /etc/dracut.conf.d/hatlocker.conf
