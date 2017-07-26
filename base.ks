@@ -55,7 +55,7 @@ dracut -v --force --no-hostonly --reproducible --show-modules /boot/hlinitramfs-
 
 # Rewrite fstab
 echo "" >/etc/fstab
-echo "/dev/mapper/datavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+#echo "/dev/mapper/datavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
 # TODO: Overlayfs from /sysetc and etcvol to /etc
 #echo "
 
