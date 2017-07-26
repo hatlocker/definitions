@@ -52,6 +52,15 @@ echo "{{ version }}" >/var/lib/hatlocker-version
 printf "add_dracutmodules+=\" verity crypt \"\nhostonly=\"no\"" > /etc/dracut.conf.d/hatlocker.conf
 kernel="`ls /boot/vmlinuz-* | sed -e 's./boot/vmlinuz-..'`"
 dracut -v --force --no-hostonly --reproducible --show-modules /boot/hlinitramfs-$kernel.img $kernel
+
+# Rewrite fstab
+echo "" >/etc/fstab
+echo "/dev/mapper/datavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+# TODO: Overlayfs from /sysetc and etcvol to /etc
+#echo "
+
+# Move /etc
+#mv /etc /sysetc
 %end
 
 
