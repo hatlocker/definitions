@@ -66,6 +66,11 @@ echo "tmpfs   /tmp         tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fs
 #mv /etc /sysetc
 #mkdir /mnt/etc
 #mkdir /etc
+
+# Make lightdm default
+rm -f /etc/systemd/system/display-manager.service /etc/systemd/system/default.target
+ln -s /usr/lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service
+ln -s /usr/lib/systemd/system/graphical.target /etc/systemd/system/default.target
 %end
 
 
