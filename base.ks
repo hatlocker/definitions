@@ -24,7 +24,8 @@ clearpart --all
 part /boot --fstype="ext4" --size=200
 part / --fstype="ext4" --grow --size=1000
 # Disable root
-rootpw --lock
+#rootpw --lock
+rootpw provision123
 # SELinux enforcing
 selinux --enforcing
 # Timezone
@@ -55,12 +56,16 @@ dracut -v --force --no-hostonly --reproducible --show-modules /boot/hlinitramfs-
 
 # Rewrite fstab
 echo "" >/etc/fstab
-#echo "/dev/mapper/datavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+echo "/dev/mapper/datavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+#echo "/dev/mapper/datavg-datavol /mnt/etc                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+echo "tmpfs   /tmp         tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
+#echo "overlay /merged overlay noauto,x-systemd.automount,lowerdir=/lower,upperdir=/upper,workdir=/work 0 0" >>/etc/fstab
 # TODO: Overlayfs from /sysetc and etcvol to /etc
-#echo "
 
 # Move /etc
 #mv /etc /sysetc
+#mkdir /mnt/etc
+#mkdir /etc
 %end
 
 
