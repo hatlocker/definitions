@@ -54,18 +54,27 @@ printf "add_dracutmodules+=\" verity crypt \"\nhostonly=\"no\"" > /etc/dracut.co
 kernel="`ls /boot/vmlinuz-* | sed -e 's./boot/vmlinuz-..'`"
 dracut -v --force --no-hostonly --reproducible --show-modules /boot/hlinitramfs-$kernel.img $kernel
 
-# Rewrite fstab
-echo "" >/etc/fstab
-echo "/dev/mapper/datavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
-#echo "/dev/mapper/datavg-datavol /mnt/etc                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
-echo "tmpfs   /tmp         tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
-#echo "overlay /merged overlay noauto,x-systemd.automount,lowerdir=/lower,upperdir=/upper,workdir=/work 0 0" >>/etc/fstab
-# TODO: Overlayfs from /sysetc and etcvol to /etc
+# Create mnt dirs
+mkdir /mnt/etc
+mkdir /mnt/var
+mkdir /mnt/var_work
 
-# Move /etc
-#mv /etc /sysetc
-#mkdir /mnt/etc
-#mkdir /etc
+# Rewrite fstab
+# TODO: Make sure that guestfs (imgfac, FactoryUtils.py:48, does not crash
+echo "" >/etc/fstab
+echo "tmpfs   /tmp         tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
+echo "tmpfs   /var_work  tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
+echo "tmpfs   /var       tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
+echo "/dev/mapper/datavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+echo "/dev/mapper/datavg-etcvol  /mnt/etc                    xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+echo "overlay /var overlay noauto,x-systemd.automount,lowerdir=/var,upperdir=/mnt/var,workdir=/mnt/var_work 0 0" >>/etc/fstab
+
+# Create tempfiles now
+systemd-tmpfiles --create --boot
+
+# Disable some tmpfiles
+ln -s /dev/null /etc/tmpfiles.d/home.conf
+ln -s /dev/null /etc/tmpfiles.d/etc.conf
 
 # Make lightdm default
 rm -f /etc/systemd/system/display-manager.service /etc/systemd/system/default.target
