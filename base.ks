@@ -63,8 +63,8 @@ mkdir /mnt/var_work
 # TODO: Make sure that guestfs (imgfac, FactoryUtils.py:48, does not crash
 echo "" >/etc/fstab
 echo "tmpfs   /tmp         tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
-echo "tmpfs   /var_work  tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
-echo "tmpfs   /var       tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
+echo "tmpfs   /mnt/var_work  tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
+echo "tmpfs   /mnt/var       tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
 echo "/dev/mapper/datavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
 echo "/dev/mapper/datavg-etcvol  /mnt/etc                    xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
 echo "overlay /var overlay noauto,x-systemd.automount,lowerdir=/var,upperdir=/mnt/var,workdir=/mnt/var_work 0 0" >>/etc/fstab
