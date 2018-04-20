@@ -57,29 +57,27 @@ dracut -v --force --no-hostonly --reproducible --show-modules /boot/hlinitramfs-
 
 # Create mnt dirs
 mkdir /mnt/etc
-mkdir /mnt/var
-mkdir /mnt/var_work
+mkdir /mnt/stateless
+mkdir /mnt/state
 
 # Rewrite fstab
 echo "" >/etc/fstab
 echo "tmpfs   /tmp         tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
-echo "tmpfs   /mnt/var_work  tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
-echo "tmpfs   /mnt/var       tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
-#echo "/dev/mapper/hldatavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
-#echo "/dev/mapper/hldatavg-etcvol  /mnt/etc                    xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
-echo "overlay /var overlay noauto,x-systemd.automount,lowerdir=/var,upperdir=/mnt/var,workdir=/mnt/var_work 0 0" >>/etc/fstab
-
-# Create tempfiles now
-systemd-tmpfiles --create --boot
-
-# Disable some tmpfiles
-ln -s /dev/null /etc/tmpfiles.d/home.conf
-ln -s /dev/null /etc/tmpfiles.d/etc.conf
+echo "/dev/mapper/hldatavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+echo "/dev/mapper/hldatavg-etcvol  /mnt/etc                    xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
 
 # Make lightdm default
 rm -f /etc/systemd/system/display-manager.service /etc/systemd/system/default.target
 ln -s /usr/lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service
 ln -s /usr/lib/systemd/system/graphical.target /etc/systemd/system/default.target
+
+# Configure readonly-root
+echo "" >/etc/sysconfig/readonly-root
+echo "READONLY=yes" >>/etc/sysconfig/readonly-root
+echo "TEMPORARY_STATE=yes" >>/etc/sysconfig/readonly-root
+echo "RW_MOUNT=/mnt/stateless" >>/etc/sysconfig/readonly-root
+echo "STATE_MOUNT=/mnt/state" >>/etc/sysconfig/readonly-root
+echo "RW_OPTIONS=noexec" >>/etc/sysconfig/readonly-root
 %end
 
 
