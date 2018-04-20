@@ -48,6 +48,7 @@ rm -f /var/lib/rpm/__db*
 
 # Register our compose time
 echo "{{ version }}" >/var/lib/hatlocker-version
+echo "Hatlocker {{ version }}" >/etc/system-release
 
 # Make sure we get the correct dracut modules added
 printf "add_dracutmodules+=\" verity crypt \"\nhostonly=\"no\"" > /etc/dracut.conf.d/hatlocker.conf
@@ -60,13 +61,12 @@ mkdir /mnt/var
 mkdir /mnt/var_work
 
 # Rewrite fstab
-# TODO: Make sure that guestfs (imgfac, FactoryUtils.py:48, does not crash
 echo "" >/etc/fstab
 echo "tmpfs   /tmp         tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
 echo "tmpfs   /mnt/var_work  tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
 echo "tmpfs   /mnt/var       tmpfs   nodev,nosuid,size=2G          0  0" >>/etc/fstab
-echo "/dev/mapper/hldatavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
-echo "/dev/mapper/hldatavg-etcvol  /mnt/etc                    xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+#echo "/dev/mapper/hldatavg-datavol /home                       xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
+#echo "/dev/mapper/hldatavg-etcvol  /mnt/etc                    xfs     defaults,x-systemd.device-timeout=0 0 0" >>/etc/fstab
 echo "overlay /var overlay noauto,x-systemd.automount,lowerdir=/var,upperdir=/mnt/var,workdir=/mnt/var_work 0 0" >>/etc/fstab
 
 # Create tempfiles now
