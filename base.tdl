@@ -2,7 +2,7 @@
   <name>hatlocker</name>
   <os>
     <name>Fedora</name>
-    <version>27</version>
+    <version>{{ base_version }}</version>
     <arch>x86_64</arch>
     <install type='url'>
       <url>https://dl.fedoraproject.org/pub/fedora/linux/releases/27/Everything/x86_64/os/</url>
