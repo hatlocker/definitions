@@ -96,8 +96,6 @@ cryptsetup
 efibootmgr
 basesystem
 veritysetup
-# Hatlocker custom packages
-dracut-verity
 # The custom packages
 i3
 i3lock
