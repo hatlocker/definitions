@@ -1,7 +1,7 @@
 name = "hatlocker"
 description = "HatLocker"
-version = "0.0.1"
-distro = "fedora-40"
+version = "{{ version }}"
+distro = "{{ distro }}"
 
 [[packages]]
 name = "tmux"
@@ -31,7 +31,7 @@ disabled = []
 [[customizations.repositories]]
 id = "hatlocker"
 name = "Hatlocker"
-baseurls = ["https://hatlocker.github.io/repo/repo/"]
-gpgcheck=false
-gpgkeys = []
+baseurls = ["{{ repo_url }}"]
+gpgcheck = true
+gpgkeys = ["{{ repo_key_url }}"]
 enabled = true
