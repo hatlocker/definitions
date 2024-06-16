@@ -1,0 +1,37 @@
+name = "hatlocker"
+description = "HatLocker"
+version = "0.0.1"
+distro = "fedora-40"
+
+[[packages]]
+name = "tmux"
+
+[[containers]]
+source = "quay.io/fedora/fedora:latest"
+
+[customizations.services]
+enabled = []
+disabled = []
+masked = []
+
+[customizations.timezone]
+timezone = "Europe/Amsterdam"
+
+[customizations.locale]
+languages = ["en_US.UTF-8"]
+keyboard = "us"
+
+[customizations.firewall]
+ports = []
+
+[customizations.firewall.services]
+enabled = []
+disabled = []
+
+[[customizations.repositories]]
+id = "hatlocker"
+name = "Hatlocker"
+baseurls = ["https://hatlocker.github.io/repo/repo/"]
+gpgcheck=false
+gpgkeys = []
+enabled = true
